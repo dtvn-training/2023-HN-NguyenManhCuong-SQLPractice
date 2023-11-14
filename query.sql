@@ -62,8 +62,36 @@ CREATE TABLE `event` (
 	INDEX `FK_event_fanpage` (`fanpage_id`) USING BTREE,
 	CONSTRAINT `FK_event_fanpage` FOREIGN KEY (`fanpage_id`) REFERENCES `fanpage` (`id`)
 )
-
 ;
+
+-- 10. We also want to know member in event , and event have member ? 
+CREATE TABLE `event_member` (
+	`user_id` INT(10) NOT NULL,
+	`event_id` INT(10) NOT NULL,
+	`task` TEXT NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`status` INT(10) NOT NULL DEFAULT '0',
+	INDEX `FK__user` (`user_id`) USING BTREE,
+	INDEX `FK__event` (`event_id`) USING BTREE,
+	CONSTRAINT `FK__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+	CONSTRAINT `FK__event` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)
+)
+;
+
+-- 11. Finally, We want to know who is donator for an event:
+CREATE TABLE `donation` (
+	`user_id` INT(10) NOT NULL,
+	`event_id` INT(10) NOT NULL,
+	`money` INT(10) NOT NULL,
+	`message` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8mb4_0900_ai_ci',
+	`time_stamp` BIGINT(19) NOT NULL DEFAULT '0',
+	INDEX `FK_donation_user` (`user_id`) USING BTREE,
+	INDEX `FK_donation_event` (`event_id`) USING BTREE,
+	CONSTRAINT `FK_donation_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+	CONSTRAINT `FK_donation_event` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)
+)
+;
+
+
 
 
 
