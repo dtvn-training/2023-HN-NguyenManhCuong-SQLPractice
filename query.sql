@@ -91,8 +91,20 @@ CREATE TABLE `donation` (
 )
 ;
 
+-- Bypass the CRUD query
+-- Advance practice: 
+-- 12. for user input : username = 'cuong', password = '123456'
+SELECT * 
+FROM `user` 
+WHERE `name` = 'cuong' AND `password` = '123456'
 
+-- 13. for user input : username = 'cuong' OR 1=1 --' , password = 'sahkjdfghjasdf'
+SELECT * 
+FROM `user` 
+WHERE `name` = 'cuong' OR 1=1 -- AND `password` = 'sahkjdfghjasdf'
+-- > shouldn't
 
+-- 14.
 
 
 
